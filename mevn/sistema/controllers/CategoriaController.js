@@ -32,7 +32,13 @@ export default{
     },
     list:async(req,res,next)=>{
         try {
-            const reg = await models.Categoria.find({})
+            let valor = req.query.valor
+            const reg = await models.Categoria.find({$or:[{'nome': new RegExp(valor, 'i')},{'descricao': new RegExp(valor, 'i')}]},{createdAt:0})
+            .sort({'createdAt':-1})
+            //segundo parâmetro do find com zero não mostra o campo
+            //se quizer que apareça só um campo 1
+            //parameto i tomar em conta maíusculas e minúsculas
+            //RegExp como se fosse um like sql
             res.status(200).json(reg)
         } catch (error) {
             res.status(500).send({
