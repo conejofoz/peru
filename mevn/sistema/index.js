@@ -35,7 +35,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.static(path.join(__dirname,'public')))
 
 app.use('/api',router)
-app.set('port',process.env.PORT || 3000)
+app.set('port',process.env.PORT || 6000)
 
 app.listen(app.get('port'),()=>{
     console.log('Server on port ' + app.get('port'))
