@@ -5,5 +5,5 @@ import Usuario from './usuario'
 export default{
     Categoria,
     Produto,
-    Usuario,
+    Usuario
 }

@@ -1,4 +1,5 @@
 import mongoose, {Schema} from 'mongoose'
+
 const usuarioSchema = new Schema({
     rol: {type:String, maxlength:30, unique:true},
     nome: {type:String, maxlength:50, required:true},
