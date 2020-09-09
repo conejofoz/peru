@@ -12,11 +12,13 @@ import path from 'path'
 import mongoose from 'mongoose'
 import router from './routes' //tem um index.js que importa todas as rotas
 
+
+/* Conexão com o banco de dados mongoDB */
 mongoose.Promise=global.Promise;
 const dbUrl = 'mongodb://localhost:27017/dbsistema'
 mongoose.connect(dbUrl, {useCreateIndex:true, useNewUrlParser:true})
-.then(mongoose => console.log('Conectado no banco de dados na porta 27017'))
-.catch(err => console.log(err))
+    .then(mongoose => console.log('Conectado no banco de dados na porta 27017'))
+    .catch(err => console.log(err))
 
 
 const app=express();
