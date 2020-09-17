@@ -1,15 +1,16 @@
 import routerx from 'express-promise-router'
 import categoriaController from '../controllers/CategoriaController'
+import auth from '../middlewares/auth'
 
 const router=routerx()
 
-router.post('/add', categoriaController.add)
-router.get('/query',categoriaController.query)
-router.get('/list',categoriaController.list)
-router.put('/update',categoriaController.update)
-router.delete('/remove',categoriaController.remove)
-router.put('/activate',categoriaController.activate)
-router.put('/deactivate',categoriaController.deactivate)
+router.post('/add', auth.verifyDepositeiro, categoriaController.add)
+router.get('/query', auth.verifyDepositeiro, categoriaController.query)
+router.get('/list', auth.verifyDepositeiro, categoriaController.list)
+router.put('/update', auth.verifyDepositeiro, categoriaController.update)
+router.delete('/remove', auth.verifyDepositeiro, categoriaController.remove)
+router.put('/activate', auth.verifyDepositeiro, categoriaController.activate)
+router.put('/deactivate', auth.verifyDepositeiro, categoriaController.deactivate)
 
 
 export default router
