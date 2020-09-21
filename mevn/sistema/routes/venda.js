@@ -7,6 +7,8 @@ const router=routerx()
 router.post('/add', auth.verifyVendedor, vendaController.add)
 router.get('/query', auth.verifyVendedor, vendaController.query)
 router.get('/list', auth.verifyVendedor, vendaController.list)
+router.get('/grafico12meses', auth.verifyUsuario, vendaController.grafico12Meses)
+router.get('/consultaDatas', auth.verifyUsuario, vendaController.consultaDatas)
 /*
 router.put('/update', auth.verifyDepositeiro, vendaController.update)
 router.delete('/remove', auth.verifyDepositeiro, vendaController.remove)

@@ -132,5 +132,56 @@ export default{
             })
             next(error)
         }
+    },
+    grafico12Meses:async(req, res, next)=>{
+        try {
+            const reg = await models.Venda.aggregate(
+                [
+                    {
+                        $group:{
+                            _id:{
+                                mes:{$month:"$createdAt"},
+                                year:{$year:"$createdAt"}
+                            },
+                            total:{$sum:"$total"},
+                            numero:{$sum:1}
+                        }
+                    },
+                    {
+                        $sort:{
+                            "_id.year":-1,"_id.mes":-1
+                        }
+
+                    }
+                ]
+            ).limit(12)
+            res.status(200).json(reg)
+        } catch (error) {
+            res.status(500).send({
+                message:'Ocorreu um erro'
+            })
+            next(error)
+        }
+    },
+    consultaDatas:async(req,res,next)=>{
+        try {
+            let start = req.query.start
+            let end = req.query.end
+            //const reg = await models.Compra.find({$or:[{'num_comprovante': new RegExp(valor, 'i')},{'serie_comprovante': new RegExp(valor, 'i')}]},{createdAt:0})
+            const reg = await models.Venda.find({"createdAt": {"$gte": start, "$lt": end}})
+            .populate('usuario', {nome:1})
+            .populate('pessoa',{nome:1})
+            .sort({'createdAt':-1})
+            //segundo parâmetro do find com zero não mostra o campo
+            //se quizer que apareça só um campo 1
+            //parameto i tomar em conta maíusculas e minúsculas
+            //RegExp como se fosse um like sql
+            res.status(200).json(reg)
+        } catch (error) {
+            res.status(500).send({
+                message:'Ocorreu um erro'
+            })
+            next(error)
+        }
     }
 }
