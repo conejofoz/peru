@@ -3,6 +3,7 @@ import Produto from './produto'
 import Usuario from './usuario'
 import Pessoa from './pessoa'
 import Compra from './compra'
+import Venda from './venda'
 
 
 export default{
@@ -10,5 +11,6 @@ export default{
     Produto,
     Usuario,
     Pessoa, 
-    Compra
+    Compra,
+    Venda
 }
